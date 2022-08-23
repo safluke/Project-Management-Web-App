@@ -6,46 +6,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class ActionList {
+@AllArgsConstructor
+public class Actionlist {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private  long actionID;
-	
-	@Column
-	private User userID;
-	
+	private  long actionid;
+
 	@Column
 	private String content;
 	
 	@Column
-	private String status;
+	public String status="Not Started";
 	
 	@Column
-	private String deadline;
+	private String deadline;  // look into formatting issues here
 	
 	@Column
-	private int deadline1;
+	public int deadline1=50;
 	
 	@Column
-	private int deadline2;
+	public int deadline2=25;
 
-	public ActionList(long id, String status, String deadline, String content) {
-		super();
-		this.actionID = id;
-		this.userID = getUserID();
-		this.content=content;
-		this.status = status;
-		this.deadline=deadline;
-		this.deadline1 = 50;
-		this.deadline2 = 25;
 	}
 	
-	
-}
+
+//figure out how to connect userID

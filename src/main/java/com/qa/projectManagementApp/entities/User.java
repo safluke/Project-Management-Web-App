@@ -1,20 +1,20 @@
 package com.qa.projectManagementApp.entities;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 	
 	
@@ -25,31 +25,19 @@ public class User {
 	@Column
 	private String name;
 	
-	@Column
+	@Column(unique=true)
 	private String email;
 	
 	@Column
-	private String accountStatus ;
+	public String accountstatus="Active" ;
 	
 	@Column
-	private String registryDate ;
+	public LocalDateTime registrydate = LocalDateTime.now() ;
 	
 	@Column
 	private String password ;
 
-
-	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-	LocalDateTime now = LocalDateTime.now();	
-
-
-public User(String name, String email, String password) {
-    super();
-	this.name = name;
-	this.email = email;
-	this.accountStatus = "Active";
-	this.registryDate = dtf.format(now);
-	this.password = password;
-
-	}
 }
 
+// add a way to throw custom error if duplicate error given on sign in
+//add a regex check for email
