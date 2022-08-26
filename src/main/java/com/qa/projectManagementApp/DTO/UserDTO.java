@@ -1,6 +1,5 @@
-package com.qa.projectManagementApp.entities;
+package com.qa.projectManagementApp.DTO;
 
-import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,26 +10,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Login {
+public class UserDTO {
 
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private  long loginid;
+	private  long userid;
 	
-	@Column
-	private int userid;
+	@Column(nullable=false,length=20)
+	private String firstname;
 	
-	@Column
-	private String status = "Online";
+	@Column(nullable=false,length=20)
+	private String lastname;
 	
-	@Column
-	public LocalDateTime logintime= LocalDateTime.now();
-	
-		
-}
+	}
 
-// send this to db with user ID, based on email get
+

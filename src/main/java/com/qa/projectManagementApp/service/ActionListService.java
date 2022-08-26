@@ -46,9 +46,23 @@ public class ActionListService {
         existing.setDeadline(actionlist.getDeadline());
         existing.setDeadline1(actionlist.getDeadline1());
         existing.setDeadline2(actionlist.getDeadline2());
+        existing.setStatus(actionlist.getStatus());
         
-    
+        System.out.println(actionlist.status);
         return this.repo.save(existing);
+	}
+
+
+	public List<Actionlist> getAllUserActions(int userid) {
+		
+		List<Actionlist> user = repo.findByUserid(userid);
+		
+		return (List<Actionlist>) user;
+			
+	}
+	
+	public List<Actionlist> getActionlistByUserid(int userid) {
+		return this.repo.findActionlistByUseridJPQL(userid);
 	}
 
 }

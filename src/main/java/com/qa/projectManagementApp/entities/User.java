@@ -20,12 +20,16 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private  long id;
+	private  long userid;
 	
-	@Column
-	private String name;
 	
-	@Column(unique=true)
+	@Column(nullable=false,length=20)
+	private String firstname;
+	
+	@Column(nullable=false,length=20)
+	private String lastname;
+	
+	@Column(nullable = false, unique=true, length=50)
 	private String email;
 	
 	@Column
@@ -34,8 +38,12 @@ public class User {
 	@Column
 	public LocalDateTime registrydate = LocalDateTime.now() ;
 	
-	@Column
+	@Column(nullable=false,length=64)
 	private String password ;
+	
+	@Column
+	//private Collection<role> roles = new ArrayList<>();
+	private String role="USER";
 
 }
 

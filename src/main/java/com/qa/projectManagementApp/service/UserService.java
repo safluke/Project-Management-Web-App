@@ -1,23 +1,35 @@
 package com.qa.projectManagementApp.service;
 
 import java.util.List;
-
+import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.qa.projectManagementApp.DTO.UserDTO;
+import com.qa.projectManagementApp.Exception.UserNotFoundException;
+import com.qa.projectManagementApp.Security.CustomUserDetails;
 import com.qa.projectManagementApp.entities.User;
 import com.qa.projectManagementApp.repo.UserRepo;
 
 
+
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 	
 	private UserRepo repo;
+	private ModelMapper mapper;
 	
-	
-	public UserService(UserRepo repo) {
+	public UserService(UserRepo repo, ModelMapper mapper) {
 		super();
 		this.repo = repo;
+		this.mapper = mapper;
 	}
+	
+	private UserDTO mapToDTO(User user) {
+        return this.mapper.map(user, UserDTO.class);
+    }
 
 
 	public List<User> getAllUsers() {
@@ -25,11 +37,39 @@ public class UserService {
 	}
 	
 	public User addUser(User user) {
+		boolean check = isValidEmailAddress(user.getEmail());
+		if (check) {
 		return repo.save(user);
-	
+		
+		}else {
+			return user;}
+				
 	}
 	
-	public List<User> getUserByEmail(String email) {
-		return this.repo.findUserByEmailJPQL(email);
+	public UserDTO getUserByEmail(String email) {
+		User found = this.repo.findUserByEmailJPQL(email);
+		if (found == null) { throw new UserNotFoundException();}
+		else {return this.mapToDTO(found);}
+}
+	
+	
+    public boolean isValidEmailAddress(String email) {
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
+ }
+
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		
+		User user = repo.findByEmail(email);
+		//System.out.println(repo.findByEmail(email));
+		if (user==null) {
+			throw new UsernameNotFoundException("User Not Found");
+		}
+		
+		return new CustomUserDetails(user);
 	}
 }

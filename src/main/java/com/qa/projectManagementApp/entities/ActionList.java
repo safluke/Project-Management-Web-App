@@ -1,5 +1,7 @@
 package com.qa.projectManagementApp.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,15 +21,21 @@ public class Actionlist {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private  long actionid;
-
+	
+	@Column
+	private int userid;
+	
+	@Column
+	private LocalDateTime datecreated = LocalDateTime.now();
+	
 	@Column
 	private String content;
-	
+
 	@Column
 	public String status="Not Started";
 	
 	@Column
-	private String deadline;  // look into formatting issues here
+	private String deadline;  
 	
 	@Column
 	public int deadline1=50;

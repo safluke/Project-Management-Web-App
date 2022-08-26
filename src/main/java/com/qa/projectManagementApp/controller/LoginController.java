@@ -2,8 +2,7 @@ package com.qa.projectManagementApp.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +26,7 @@ public class LoginController {
 		 return this.service.getAllLogins();
 	}
 	
-
+	@CrossOrigin
 	@PostMapping("/createLogin")
 	public Login addLogin(@RequestBody Login login ) {
 		

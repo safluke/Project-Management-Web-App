@@ -23,6 +23,7 @@ public class LoginService {
 	}
 
 	public Login addLogin(Login login) {
+			
 		return repo.save(login);
 	}
 	
