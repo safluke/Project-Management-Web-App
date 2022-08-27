@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.qa.projectManagementApp.DTO.UserDTO;
@@ -18,6 +19,7 @@ import com.qa.projectManagementApp.repo.UserRepo;
 @Service
 public class UserService implements UserDetailsService {
 	
+
 	private UserRepo repo;
 	private ModelMapper mapper;
 	
@@ -39,6 +41,9 @@ public class UserService implements UserDetailsService {
 	public User addUser(User user) {
 		boolean check = isValidEmailAddress(user.getEmail());
 		if (check) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();	
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
 		return repo.save(user);
 		
 		}else {

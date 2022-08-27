@@ -38,7 +38,7 @@ public class User {
 	@Column
 	public LocalDateTime registrydate = LocalDateTime.now() ;
 	
-	@Column(nullable=false,length=64)
+	@Column(nullable=false,length=150)
 	private String password ;
 	
 	@Column
