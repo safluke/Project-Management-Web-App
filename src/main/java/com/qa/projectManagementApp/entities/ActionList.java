@@ -1,5 +1,6 @@
 package com.qa.projectManagementApp.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -26,7 +27,7 @@ public class Actionlist {
 	private int userid;
 	
 	@Column
-	private LocalDateTime datecreated = LocalDateTime.now();
+	private LocalDate datecreated = LocalDate.now();
 	
 	@Column
 	private String content;
@@ -35,13 +36,13 @@ public class Actionlist {
 	public String status="Not Started";
 	
 	@Column
-	private String deadline;  
+	private LocalDate deadline;  
 	
 	@Column
-	public int deadline1=50;
+	public LocalDate deadline1=LocalDate.now().plusDays(3L);
 	
 	@Column
-	public int deadline2=25;
+	public LocalDate deadline2=LocalDate.now().plusDays(7L);
 
 	}
 	

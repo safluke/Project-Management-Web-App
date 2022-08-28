@@ -1,5 +1,6 @@
 package com.qa.projectManagementApp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.assertj.core.api.Assertions;
@@ -23,8 +24,8 @@ public class ActionServiceUnitTest {
 	
 	@Test
 	void testCreate() {
-		final Actionlist TEST_ACTIONLIST= new Actionlist(0, 5, null, "content", null, "2020-10-10", 0, 0);
-		final Actionlist TEST_SAVED_ACTIONLIST=new Actionlist(1L, 0, LocalDateTime.now(), "content", "Not Started", "2020-10-10", 50, 25);
+		final Actionlist TEST_ACTIONLIST= new Actionlist(0, 5, LocalDate.now(), "content", null, LocalDate.now(), null, null);
+		final Actionlist TEST_SAVED_ACTIONLIST=new Actionlist(1L, 0, LocalDate.now(), "content", "Not Started", LocalDate.now(), LocalDate.now(), LocalDate.now());
 		// WHEN
 		Mockito.when(this.repo.save(TEST_ACTIONLIST)).thenReturn((TEST_SAVED_ACTIONLIST));
 		// THEN
