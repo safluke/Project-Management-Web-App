@@ -1,5 +1,6 @@
 package com.qa.projectManagementApp.controller;
 
+import java.util.Base64;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.projectManagementApp.entities.Actionlist;
@@ -30,15 +32,17 @@ public class ActionListController {
 
 	@CrossOrigin
 	@PostMapping("/createActionList")
-	public Actionlist addActionlist(@RequestBody Actionlist actionlist) {
+	public Actionlist addActionlist(@RequestHeader(value="Authorization")String authorizationHeader ,
+									@RequestBody Actionlist actionlist) {
 		
-		return this.service.addActionList(actionlist);
+		return this.service.addActionList(actionlist,authorizationHeader);
 		
 		}
 	@CrossOrigin
 	@DeleteMapping("/deleteaction/{actionid}")
-	public boolean removePerson(@PathVariable int actionid) {
-		return this.service.removeAction(actionid);
+	public boolean removePerson(@RequestHeader(value="Authorization")String authorizationHeader ,
+								@PathVariable int actionid) {
+		return this.service.removeAction(actionid,authorizationHeader);
 	}
 	
 	@CrossOrigin
@@ -49,15 +53,17 @@ public class ActionListController {
 	
 	@CrossOrigin
 	@GetMapping("/getUserActions")
-	public List<Actionlist> getUser(@PathParam("email") Integer userid){
-		return this.service.getActionlistByUserid(userid);
+	public List<Actionlist> getUser(@RequestHeader(value="Authorization")String authorizationHeader ,
+									@PathParam("email") Integer userid){
+		return this.service.getActionlistByUserid(userid,authorizationHeader);
 	}
 	
 	@CrossOrigin
 	@PutMapping("/updateAction")
-	public Actionlist updateAction(@PathParam("actionid") int actionid, @RequestBody Actionlist actionlist) {
+	public Actionlist updateAction(@RequestHeader(value="Authorization")String authorizationHeader ,
+								   @PathParam("actionid") int actionid, @RequestBody Actionlist actionlist) {
 		System.out.println(actionlist.status);
-		return this.service.updateAction(actionid, actionlist);
+		return this.service.updateAction(actionid, actionlist,authorizationHeader);
 		
 	}
 }

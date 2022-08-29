@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.projectManagementApp.entities.Login;
@@ -28,12 +29,10 @@ public class LoginController {
 	
 	@CrossOrigin
 	@PostMapping("/createLogin")
-	public Login addLogin(@RequestBody Login login ) {
+	public Login addLogin(@RequestHeader(value="Authorization")String authorizationHeader ,
+						  @RequestBody Login login ) {
 		
-		return this.service.addLogin(login);
+		return this.service.addLogin(login,authorizationHeader);
 	}
 
 }
-
-
-//add a way to find login by userID

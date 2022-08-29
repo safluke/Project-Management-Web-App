@@ -29,7 +29,7 @@ public class LoginServiceUnitTest {
 		// WHEN
 		Mockito.when(this.repo.save(TEST_LOGIN)).thenReturn((TEST_SAVED_LOGIN));
 		// THEN
-	     Assertions.assertThat(this.service.addLogin(TEST_LOGIN)).isEqualTo(TEST_SAVED_LOGIN);
+	     Assertions.assertThat(this.service.addLogin(TEST_LOGIN, null)).isEqualTo(TEST_SAVED_LOGIN);
 	  // verify that our repo was accessed exactly once
 	     Mockito.verify(this.repo, Mockito.times(1)).save(TEST_LOGIN);
 	}

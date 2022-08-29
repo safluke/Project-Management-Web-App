@@ -13,21 +13,28 @@ import com.qa.projectManagementApp.repo.ActionListRepo;
 public class ActionListService {
 	
 	private ActionListRepo repo;
+	private ServiceAuthHelper auth;
 	
 
-	public ActionListService(ActionListRepo repo) {
+	public ActionListService(ActionListRepo repo,ServiceAuthHelper auth) {
 		super();
 		this.repo = repo;
+		this.auth=auth;
 	}
 
 
-	public Actionlist addActionList(Actionlist actionlist) {
+	public Actionlist addActionList(Actionlist actionlist, String authorizationHeader) {
+
+		auth.checkCredentialsObject(authorizationHeader, actionlist);
 		
+		actionlist.setDeadline1(actionlist.getDeadline().plusDays(3L));
+		actionlist.setDeadline2(actionlist.getDeadline().plusDays(7L));
 		return repo.save(actionlist);
 	}
 
 
-	public boolean removeAction(int actionid) {
+	public boolean removeAction(int actionid, String authorizationHeader) {
+		auth.checkCredentialsActionId(authorizationHeader, actionid);
 		this.repo.deleteById((long) actionid);
 		boolean exists = this.repo.existsById((long) actionid);
 		return !exists;
@@ -39,7 +46,8 @@ public class ActionListService {
 	}
 
 
-	public Actionlist updateAction(int actionid, Actionlist actionlist) {
+	public Actionlist updateAction(int actionid, Actionlist actionlist, String authorizationHeader) {
+		auth.checkCredentialsActionId(authorizationHeader, actionid);
 		Optional<Actionlist> existingOptional = this.repo.findById((long) actionid);
         Actionlist existing = existingOptional.get();
         
@@ -62,11 +70,9 @@ public class ActionListService {
 			
 	}
 	
-	public List<Actionlist> getActionlistByUserid(int userid) {
+	public List<Actionlist> getActionlistByUserid(int userid, String authorizationHeader) {
+		auth.checkCredentialsUserId(authorizationHeader, userid);
 		return this.repo.findActionlistByUseridJPQL(userid);
 	}
-
+	
 }
-
-
-// add a way to change deadline 1/2  content etc i.e. put  and then delete

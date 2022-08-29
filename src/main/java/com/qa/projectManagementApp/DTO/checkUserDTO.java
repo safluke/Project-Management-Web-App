@@ -9,26 +9,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-
-		
+public class checkUserDTO {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private  long userid;
-	
-	@Column(nullable=false,length=20)
-	private String firstname;
-	
-	@Column(nullable=false,length=20)
-	private String lastname;
-	
+
 	@Column(nullable = false, unique=true, length=50)
 	private String email;
-	
-	}
-
-
+}

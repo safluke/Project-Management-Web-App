@@ -18,6 +18,8 @@ public interface ActionListRepo extends JpaRepository<Actionlist, Long>{
 	@Query("SELECT p from Actionlist p WHERE p.userid = ?1")
 	List<Actionlist> findActionlistByUseridJPQL(int userid);
 	
+	@Query("SELECT p from Actionlist p WHERE p.actionid = ?1")
+	Actionlist findUseridbyActionidJPQL(long actionid);
 	
 	
 }

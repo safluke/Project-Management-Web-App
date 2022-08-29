@@ -41,25 +41,23 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/createUser","/getUser")
+		.antMatchers("/","/createUser","/checkUser")
 		.permitAll()
-		.antMatchers("/","/createLogin","/createActionList","/deleteaction/{actionid}","/updateAction","/getUserActions")
+		.antMatchers("/createLogin","/createActionList","/deleteaction/{actionid}","/updateAction","/getUserActions")
 		.hasAuthority("USER")
-		.antMatchers("/getAllLogin","/getAllActions","/getAllUsers")
+		.antMatchers("/getAllLogin","/getAllActions","/getAllUsers","/getUser")
 		.hasAuthority("ADMIN")
 		.anyRequest()
 		.authenticated()
 		.and()
 		.httpBasic()
 		.and().cors().and().csrf().disable();
-		
-		
-	}
+		}
 	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-	    web.ignoring().antMatchers("/createUser");
-	}
+//	@Override
+//	public void configure(WebSecurity web) throws Exception {
+//	    web.ignoring().antMatchers("/createUser");
+//	}
 	
    
 }

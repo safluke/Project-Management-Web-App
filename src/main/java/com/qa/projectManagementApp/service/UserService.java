@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.qa.projectManagementApp.DTO.UserDTO;
+import com.qa.projectManagementApp.DTO.checkUserDTO;
 import com.qa.projectManagementApp.Exception.UserNotFoundException;
 import com.qa.projectManagementApp.Security.CustomUserDetails;
 import com.qa.projectManagementApp.entities.User;
@@ -31,6 +32,10 @@ public class UserService implements UserDetailsService {
 	
 	private UserDTO mapToDTO(User user) {
         return this.mapper.map(user, UserDTO.class);
+    }
+	
+	private checkUserDTO mapToDTOcheck(User user) {
+        return this.mapper.map(user, checkUserDTO.class);
     }
 
 
@@ -57,6 +62,13 @@ public class UserService implements UserDetailsService {
 		else {return this.mapToDTO(found);}
 }
 	
+	public checkUserDTO checkUserByEmail(String email) {
+		User found = this.repo.findUserByEmailJPQL(email);
+		if (found == null) { throw new UserNotFoundException();}
+		else {return this.mapToDTOcheck(found);}
+}
+	
+	
 	
     public boolean isValidEmailAddress(String email) {
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
@@ -65,12 +77,12 @@ public class UserService implements UserDetailsService {
         return m.matches();
  }
 
-
-	@Override
+    
+ 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		
 		User user = repo.findByEmail(email);
-		//System.out.println(repo.findByEmail(email));
+
 		if (user==null) {
 			throw new UsernameNotFoundException("User Not Found");
 		}

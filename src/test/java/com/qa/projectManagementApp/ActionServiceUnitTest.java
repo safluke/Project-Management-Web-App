@@ -29,7 +29,7 @@ public class ActionServiceUnitTest {
 		// WHEN
 		Mockito.when(this.repo.save(TEST_ACTIONLIST)).thenReturn((TEST_SAVED_ACTIONLIST));
 		// THEN
-	     Assertions.assertThat(this.service.addActionList(TEST_ACTIONLIST)).isEqualTo(TEST_SAVED_ACTIONLIST);
+	     Assertions.assertThat(this.service.addActionList(TEST_ACTIONLIST, null)).isEqualTo(TEST_SAVED_ACTIONLIST);
 	  // verify that our repo was accessed exactly once
 	     Mockito.verify(this.repo, Mockito.times(1)).save(TEST_ACTIONLIST);
 	}
