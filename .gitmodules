@@ -1,0 +1,3 @@
+[submodule "projectMangementApp/target"]
+	path=projectMangementApp/target
+	url=https://github.com/safluke/Project-Management-Web-App.git
