@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-public class Actionlist {
+public class ActionList {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +41,11 @@ public class Actionlist {
 	@Column
 	private LocalDate deadline2=LocalDate.now().plusDays(7L);
 
-	public Actionlist() {
+	public ActionList() {
 		super();
 	}
 
-	public Actionlist(long actionid, int userid, LocalDate datecreated, String content, String status,
+	public ActionList(long actionid, int userid, LocalDate datecreated, String content, String status,
 			LocalDate deadline, LocalDate deadline1, LocalDate deadline2) {
 		super();
 		this.actionid = actionid;

@@ -6,20 +6,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.qa.projectManagementApp.entities.Actionlist;
+import com.qa.projectManagementApp.entities.ActionList;
 
 
 @Repository
-public interface ActionListRepo extends JpaRepository<Actionlist, Long>{
+public interface ActionListRepo extends JpaRepository<ActionList, Long>{
 
-	List<Actionlist> findByUserid(int userid);
+	List<ActionList> findByUserid(int userid);
 
 	
 	@Query("SELECT p from Actionlist p WHERE p.userid = ?1")
-	List<Actionlist> findActionlistByUseridJPQL(int userid);
+	List<ActionList> findActionlistByUseridJPQL(int userid);
 	
 	@Query("SELECT p from Actionlist p WHERE p.actionid = ?1")
-	Actionlist findUseridbyActionidJPQL(long actionid);
+	ActionList findUseridbyActionidJPQL(long actionid);
 	
 	
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.projectManagementApp.Exception.UserRequestMatchException;
-import com.qa.projectManagementApp.entities.Actionlist;
+import com.qa.projectManagementApp.entities.ActionList;
 import com.qa.projectManagementApp.entities.Login;
 import com.qa.projectManagementApp.repo.ActionListRepo;
 import com.qa.projectManagementApp.repo.UserRepo;
@@ -22,7 +22,7 @@ public class ServiceAuthHelper {
 
 
 	// decodes
-	public boolean checkCredentialsObject(String authorizationHeader, Actionlist actionlist) {
+	public boolean checkCredentialsObject(String authorizationHeader, ActionList actionlist) {
 		String encode = authorizationHeader.split(" ")[1];
 		byte[] decodedBytes = Base64.getDecoder().decode(encode);
 		String decodedString = new String(decodedBytes);

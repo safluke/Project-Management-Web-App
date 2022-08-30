@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.qa.projectManagementApp.entities.Actionlist;
+import com.qa.projectManagementApp.entities.ActionList;
 import com.qa.projectManagementApp.repo.ActionListRepo;
 
 
@@ -23,7 +23,7 @@ public class ActionListService {
 	}
 
 
-	public Actionlist addActionList(Actionlist actionlist, String authorizationHeader) {
+	public ActionList addActionList(ActionList actionlist, String authorizationHeader) {
 
 		auth.checkCredentialsObject(authorizationHeader, actionlist);
 		
@@ -41,15 +41,15 @@ public class ActionListService {
 	}
 
 
-	public List<Actionlist> getAllActions() {
+	public List<ActionList> getAllActions() {
 		return this.repo.findAll();
 	}
 
 
-	public Actionlist updateAction(int actionid, Actionlist actionlist, String authorizationHeader) {
+	public ActionList updateAction(int actionid, ActionList actionlist, String authorizationHeader) {
 		auth.checkCredentialsActionId(authorizationHeader, actionid);
-		Optional<Actionlist> existingOptional = this.repo.findById((long) actionid);
-        Actionlist existing = existingOptional.get();
+		Optional<ActionList> existingOptional = this.repo.findById((long) actionid);
+        ActionList existing = existingOptional.get();
         
         existing.setContent(actionlist.getContent());
         existing.setDeadline(actionlist.getDeadline());
@@ -62,15 +62,15 @@ public class ActionListService {
 	}
 
 
-	public List<Actionlist> getAllUserActions(int userid) {
+	public List<ActionList> getAllUserActions(int userid) {
 		
-		List<Actionlist> user = repo.findByUserid(userid);
+		List<ActionList> user = repo.findByUserid(userid);
 		
-		return (List<Actionlist>) user;
+		return (List<ActionList>) user;
 			
 	}
 	
-	public List<Actionlist> getActionlistByUserid(int userid, String authorizationHeader) {
+	public List<ActionList> getActionlistByUserid(int userid, String authorizationHeader) {
 		auth.checkCredentialsUserId(authorizationHeader, userid);
 		return this.repo.findActionlistByUseridJPQL(userid);
 	}

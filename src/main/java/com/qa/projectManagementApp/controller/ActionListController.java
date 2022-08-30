@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.projectManagementApp.entities.Actionlist;
+import com.qa.projectManagementApp.entities.ActionList;
 import com.qa.projectManagementApp.service.ActionListService;
 
 
@@ -32,8 +32,8 @@ public class ActionListController {
 
 	@CrossOrigin
 	@PostMapping("/createActionList")
-	public Actionlist addActionlist(@RequestHeader(value="Authorization")String authorizationHeader ,
-									@RequestBody Actionlist actionlist) {
+	public ActionList addActionlist(@RequestHeader(value="Authorization")String authorizationHeader ,
+									@RequestBody ActionList actionlist) {
 		
 		return this.service.addActionList(actionlist,authorizationHeader);
 		
@@ -47,21 +47,21 @@ public class ActionListController {
 	
 	@CrossOrigin
 	@GetMapping("/getAllActions")
-	public List<Actionlist> getAll() {
+	public List<ActionList> getAll() {
 		 return this.service.getAllActions();
 	}
 	
 	@CrossOrigin
 	@GetMapping("/getUserActions")
-	public List<Actionlist> getUser(@RequestHeader(value="Authorization")String authorizationHeader ,
+	public List<ActionList> getUser(@RequestHeader(value="Authorization")String authorizationHeader ,
 									@PathParam("email") Integer userid){
 		return this.service.getActionlistByUserid(userid,authorizationHeader);
 	}
 	
 	@CrossOrigin
 	@PutMapping("/updateAction")
-	public Actionlist updateAction(@RequestHeader(value="Authorization")String authorizationHeader ,
-								   @PathParam("actionid") int actionid, @RequestBody Actionlist actionlist) {
+	public ActionList updateAction(@RequestHeader(value="Authorization")String authorizationHeader ,
+								   @PathParam("actionid") int actionid, @RequestBody ActionList actionlist) {
 		System.out.println(actionlist.getStatus());
 		return this.service.updateAction(actionid, actionlist,authorizationHeader);
 		
