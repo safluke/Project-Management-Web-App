@@ -57,7 +57,7 @@ public class ActionListService {
         existing.setDeadline2(actionlist.getDeadline2());
         existing.setStatus(actionlist.getStatus());
         
-        System.out.println(actionlist.status);
+        System.out.println(actionlist.getStatus());
         return this.repo.save(existing);
 	}
 

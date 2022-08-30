@@ -62,7 +62,7 @@ public class ActionListController {
 	@PutMapping("/updateAction")
 	public Actionlist updateAction(@RequestHeader(value="Authorization")String authorizationHeader ,
 								   @PathParam("actionid") int actionid, @RequestBody Actionlist actionlist) {
-		System.out.println(actionlist.status);
+		System.out.println(actionlist.getStatus());
 		return this.service.updateAction(actionid, actionlist,authorizationHeader);
 		
 	}

@@ -12,9 +12,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class User {
 	
 	
@@ -44,6 +41,88 @@ public class User {
 	@Column
 	//private Collection<role> roles = new ArrayList<>();
 	private String role="USER";
+
+	public User() {
+		super();
+	}
+
+	public User(long userid, String firstname, String lastname, String email, String accountstatus,
+			LocalDateTime registrydate, String password, String role) {
+		super();
+		this.userid = userid;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.accountstatus = accountstatus;
+		this.registrydate = registrydate;
+		this.password = password;
+		this.role = role;
+	}
+
+	public long getUserid() {
+		return userid;
+	}
+
+	public void setUserid(long userid) {
+		this.userid = userid;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAccountstatus() {
+		return accountstatus;
+	}
+
+	public void setAccountstatus(String accountstatus) {
+		this.accountstatus = accountstatus;
+	}
+
+	public LocalDateTime getRegistrydate() {
+		return registrydate;
+	}
+
+	public void setRegistrydate(LocalDateTime registrydate) {
+		this.registrydate = registrydate;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 
 }
 
