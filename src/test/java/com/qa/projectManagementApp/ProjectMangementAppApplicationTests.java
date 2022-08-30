@@ -7,8 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 class ProjectMangementAppApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
 
 }
